@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Spry Rocks App</string>
+    <string name="name_hint">Enter your name</string>
+    <string name="gmail_hint">Enter your gmail account</string>
+    <string name="github_hint">Enter your github account</string>
+    <string name="position_hint">Enter your position</string>
+    <string name="gitlab_hint">Enter your gitlab account</string>
+    <string name="phone_hint">Enter your phone number</string>
+    <string name="employee_info_button">Add employee information</string>
+</resources>
