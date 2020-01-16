@@ -13,7 +13,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         android:fullBackupContent="false">
-        <activity android:name="com.ehedgehog.android.spryrocksapp.MainActivity">
+        <activity
+            android:name="com.ehedgehog.android.spryrocksapp.MainActivity"
+            android:windowSoftInputMode="stateUnchanged">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
