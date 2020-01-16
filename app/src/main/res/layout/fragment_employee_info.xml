@@ -68,6 +68,15 @@
                     tools:ignore="Autofill" />
 
                 <EditText
+                    android:id="@+id/telegram_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:hint="@string/telegram_hint"
+                    android:inputType="textEmailAddress"
+                    tools:ignore="Autofill" />
+
+                <EditText
                     android:id="@+id/gmail_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

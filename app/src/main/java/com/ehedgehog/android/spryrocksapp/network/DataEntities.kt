@@ -13,6 +13,7 @@ data class EmployeeInfo(
     val name: String,
     val position: String,
     val phone: String,
+    val telegram: String,
     val gmail: String,
     val github: String,
     val gitlab: String
@@ -21,6 +22,7 @@ data class EmployeeInfo(
         return "Name: $name\n" +
                 "Position: $position\n" +
                 "Phone: $phone\n" +
+                "Telegram: $telegram\n" +
                 "Gmail: $gmail\n" +
                 "Github: $github\n" +
                 "Gitlab: $gitlab"

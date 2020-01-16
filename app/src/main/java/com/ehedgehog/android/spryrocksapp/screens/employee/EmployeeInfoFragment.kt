@@ -41,12 +41,13 @@ class EmployeeInfoFragment : Fragment() {
                 binding.nameField.text.toString(),
                 binding.positionField.text.toString(),
                 binding.phoneField.text.toString(),
+                binding.telegramField.text.toString(),
                 binding.gmailField.text.toString(),
                 binding.githubField.text.toString(),
                 binding.gitlabField.text.toString()
             )
 
-            if (info.name.isEmpty() || info.position.isEmpty() || info.phone.isEmpty() ||
+            if (info.name.isEmpty() || info.position.isEmpty() || info.phone.isEmpty() || info.telegram.isEmpty() ||
                 info.gmail.isEmpty() || info.github.isEmpty() || info.gitlab.isEmpty()
             ) {
                 Toast.makeText(context, "Please, fill in all fields", Toast.LENGTH_SHORT).show()
