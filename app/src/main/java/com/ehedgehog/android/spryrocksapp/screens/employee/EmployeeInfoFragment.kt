@@ -4,13 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.ehedgehog.android.spryrocksapp.R
 import com.ehedgehog.android.spryrocksapp.databinding.FragmentEmployeeInfoBinding
+import com.ehedgehog.android.spryrocksapp.network.EmployeeInfo
 
 class EmployeeInfoFragment : Fragment() {
 
@@ -33,8 +36,34 @@ class EmployeeInfoFragment : Fragment() {
                 .apply(RequestOptions.circleCropTransform())
                 .into(binding.headerImage) }
 
+        binding.sendButton.setOnClickListener {
+            val info = EmployeeInfo(
+                binding.nameField.text.toString(),
+                binding.positionField.text.toString(),
+                binding.phoneField.text.toString(),
+                binding.gmailField.text.toString(),
+                binding.githubField.text.toString(),
+                binding.gitlabField.text.toString()
+            )
+
+            if (info.name.isEmpty() || info.position.isEmpty() || info.phone.isEmpty() ||
+                info.gmail.isEmpty() || info.github.isEmpty() || info.gitlab.isEmpty()
+            ) {
+                Toast.makeText(context, "Please, fill in all fields", Toast.LENGTH_SHORT).show()
+            } else
+                viewModel.createCardInBoardList(info)
+        }
+
+        viewModel.eventInfoSent.observe(this, Observer {
+            if (it) {
+                Toast.makeText(context, "Your info has been sent to HR", Toast.LENGTH_SHORT).show()
+                viewModel.onInfoSendComplete()
+            }
+        })
+
         viewModel.loadBoardLists()
 
         return binding.root
     }
+
 }

@@ -5,90 +5,107 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/header_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/company_logo"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars"
-            tools:ignore="ContentDescription" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/name_field"
+            <ImageView
+                android:id="@+id/header_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/company_logo"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars"
+                tools:ignore="ContentDescription" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:hint="@string/name_hint"
-                android:inputType="textPersonName|textCapWords"
-                tools:ignore="Autofill" />
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <EditText
-                android:id="@+id/position_field"
-                android:layout_width="match_parent"
+                <EditText
+                    android:id="@+id/name_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:hint="@string/name_hint"
+                    android:inputType="textPersonName|textCapWords"
+                    tools:ignore="Autofill" />
+
+                <EditText
+                    android:id="@+id/position_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:hint="@string/position_hint"
+                    android:inputType="text|textCapWords"
+                    tools:ignore="Autofill" />
+
+                <EditText
+                    android:id="@+id/phone_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:hint="@string/phone_hint"
+                    android:inputType="phone"
+                    tools:ignore="Autofill" />
+
+                <EditText
+                    android:id="@+id/gmail_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:hint="@string/gmail_hint"
+                    android:inputType="textEmailAddress"
+                    tools:ignore="Autofill" />
+
+                <EditText
+                    android:id="@+id/github_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:hint="@string/github_hint"
+                    android:inputType="textEmailAddress"
+                    tools:ignore="Autofill" />
+
+                <EditText
+                    android:id="@+id/gitlab_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/gitlab_hint"
+                    android:inputType="textEmailAddress"
+                    tools:ignore="Autofill" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/send_button"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:hint="@string/position_hint"
-                android:inputType="text|textCapWords"
-                tools:ignore="Autofill" />
+                android:text="@string/send_button"
+                android:backgroundTint="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-            <EditText
-                android:id="@+id/phone_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:hint="@string/phone_hint"
-                android:inputType="phone"
-                tools:ignore="Autofill" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <EditText
-                android:id="@+id/gmail_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:hint="@string/gmail_hint"
-                android:inputType="textEmailAddress"
-                tools:ignore="Autofill" />
-
-            <EditText
-                android:id="@+id/github_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:hint="@string/github_hint"
-                android:inputType="textEmailAddress"
-                tools:ignore="Autofill" />
-
-            <EditText
-                android:id="@+id/gitlab_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/gitlab_hint"
-                android:inputType="textEmailAddress"
-                tools:ignore="Autofill" />
-
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </layout>
