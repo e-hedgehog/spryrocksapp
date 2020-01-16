@@ -16,4 +16,8 @@ interface TrelloApiService {
                               @Query("name") name: String,
                               @Query("desc") description: String): Deferred<CardsResponse>
 
+    @POST("boards/{boardId}/lists")
+    fun createListInBoard(@Path("boardId") boardId: String,
+                          @Query("name") name: String): Deferred<BoardList>
+
 }

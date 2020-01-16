@@ -18,11 +18,11 @@ data class EmployeeInfo(
     val gitlab: String
 ) {
     override fun toString(): String {
-        return "Name: '$name',\n" +
-                "Position: '$position'\n" +
-                "Phone: '$phone'\n" +
-                "Gmail: '$gmail'\n" +
-                "Github: '$github'\n" +
-                "Gitlab: '$gitlab'"
+        return "Name: $name\n" +
+                "Position: $position\n" +
+                "Phone: $phone\n" +
+                "Gmail: $gmail\n" +
+                "Github: $github\n" +
+                "Gitlab: $gitlab"
     }
 }

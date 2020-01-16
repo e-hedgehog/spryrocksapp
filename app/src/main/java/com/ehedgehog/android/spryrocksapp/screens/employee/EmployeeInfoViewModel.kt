@@ -38,13 +38,29 @@ class EmployeeInfoViewModel : ViewModel() {
 
             val listsResult = listsDeferred.await()
             _lists.value = listsResult
+
+            if (listsResult.isNullOrEmpty())
+                createDefaultListInBoard()
         }
+    }
+
+    private suspend fun createDefaultListInBoard(): BoardList {
+        val createListDeferred = apiService.createListInBoard(BuildConfig.BOARD_ID, DEFAULT_LIST_NAME)
+        val boardList = createListDeferred.await()
+        _lists.value = listOf(boardList)
+        return boardList
     }
 
     fun createCardInBoardList(employeeInfo: EmployeeInfo) {
         coroutineScope.launch {
+            var employeeList = findEmployeeList()
+
+            if (employeeList == null) {
+                employeeList = createDefaultListInBoard()
+            }
+
             val cardsDeferred = apiService.createCardInBoardList(
-                lists.value!![0].id,
+                employeeList.id,
                 employeeInfo.name,
                 employeeInfo.toString()
             )
@@ -54,6 +70,14 @@ class EmployeeInfoViewModel : ViewModel() {
         }
     }
 
+    private fun findEmployeeList(): BoardList? {
+        for (list in _lists.value!!.iterator())
+            if (list.name == DEFAULT_LIST_NAME)
+                return list
+
+        return null
+    }
+
     fun onInfoSendComplete() {
         _eventInfoSent.value = false
     }
@@ -61,5 +85,9 @@ class EmployeeInfoViewModel : ViewModel() {
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
+    }
+
+    companion object {
+        private const val DEFAULT_LIST_NAME = "Employees"
     }
 }

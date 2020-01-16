@@ -17,6 +17,7 @@
                 android:id="@+id/header_image"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:layout_margin="16dp"
                 android:src="@drawable/company_logo"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout"
                 app:layout_constraintEnd_toEndOf="parent"
