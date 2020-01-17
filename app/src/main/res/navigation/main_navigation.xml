@@ -17,9 +17,21 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_dashboard_to_reportingRules"
+            app:destination="@id/reportingRulesFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/employeeInfoFragment"
         android:name="com.ehedgehog.android.spryrocksapp.screens.employee.EmployeeInfoFragment"
         android:label="Employee Info" />
+    <fragment
+        android:id="@+id/reportingRulesFragment"
+        android:name="com.ehedgehog.android.spryrocksapp.screens.rules.ReportingRulesFragment"
+        android:label="Rules of reporting" />
 </navigation>

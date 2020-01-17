@@ -27,6 +27,10 @@ class DashboardFragment: Fragment() {
             findNavController().navigate(DashboardFragmentDirections.actionDashboardToEmployeeInfo())
         }
 
+        binding.reportingRules.setOnClickListener {
+            findNavController().navigate(DashboardFragmentDirections.actionDashboardToReportingRules())
+        }
+
         return binding.root
     }
 
