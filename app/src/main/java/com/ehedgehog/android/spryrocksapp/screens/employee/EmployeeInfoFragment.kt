@@ -9,11 +9,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.ehedgehog.android.spryrocksapp.R
 import com.ehedgehog.android.spryrocksapp.databinding.FragmentEmployeeInfoBinding
 import com.ehedgehog.android.spryrocksapp.network.EmployeeInfo
+import com.ehedgehog.android.spryrocksapp.setImageWithGlide
 
 class EmployeeInfoFragment : Fragment() {
 
@@ -28,13 +27,7 @@ class EmployeeInfoFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_employee_info, container, false)
         viewModel = ViewModelProviders.of(this).get(EmployeeInfoViewModel::class.java)
 
-        context?.let {
-            Glide.with(it)
-                .load(R.drawable.company_logo)
-                .centerCrop()
-                .fitCenter()
-                .apply(RequestOptions.circleCropTransform())
-                .into(binding.headerImage) }
+        binding.headerImage.setImageWithGlide(R.drawable.company_logo, true)
 
         binding.sendButton.setOnClickListener {
             val info = EmployeeInfo(
