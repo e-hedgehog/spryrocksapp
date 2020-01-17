@@ -1,9 +1,12 @@
 package com.ehedgehog.android.spryrocksapp.screens.dashboard
 
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -24,7 +27,8 @@ class DashboardFragment: Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_dashboard, container, false)
 
         binding.addEmployeeInfo.setOnClickListener {
-            findNavController().navigate(DashboardFragmentDirections.actionDashboardToEmployeeInfo())
+            if (isOnline())
+                findNavController().navigate(DashboardFragmentDirections.actionDashboardToEmployeeInfo())
         }
 
         binding.reportingRules.setOnClickListener {
@@ -32,6 +36,17 @@ class DashboardFragment: Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun isOnline(): Boolean {
+        val connectivityManager = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectivityManager.activeNetworkInfo
+
+        if (networkInfo != null && networkInfo.isConnected)
+            return true
+
+        Toast.makeText(context, "No internet connection", Toast.LENGTH_SHORT).show()
+        return false
     }
 
 }
