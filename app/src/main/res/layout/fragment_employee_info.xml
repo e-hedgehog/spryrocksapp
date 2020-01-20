@@ -5,6 +5,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.ehedgehog.android.spryrocksapp.screens.employee.EmployeeInfoViewModel" />
+    </data>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -44,6 +50,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:text="@{viewModel.storedEmployeeInfo.name}"
                     android:hint="@string/name_hint"
                     android:inputType="textPersonName|textCapWords"
                     android:imeOptions="flagNoFullscreen"
@@ -54,6 +61,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:text="@{viewModel.storedEmployeeInfo.position}"
                     android:hint="@string/position_hint"
                     android:inputType="text|textCapWords"
                     tools:ignore="Autofill" />
@@ -63,6 +71,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:text="@{viewModel.storedEmployeeInfo.phone}"
                     android:hint="@string/phone_hint"
                     android:inputType="phone"
                     tools:ignore="Autofill" />
@@ -72,6 +81,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:text="@{viewModel.storedEmployeeInfo.telegram}"
                     android:hint="@string/telegram_hint"
                     android:inputType="textEmailAddress"
                     tools:ignore="Autofill" />
@@ -81,6 +91,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:text="@{viewModel.storedEmployeeInfo.gmail}"
                     android:hint="@string/gmail_hint"
                     android:inputType="textEmailAddress"
                     tools:ignore="Autofill" />
@@ -90,6 +101,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:text="@{viewModel.storedEmployeeInfo.github}"
                     android:hint="@string/github_hint"
                     android:inputType="textEmailAddress"
                     tools:ignore="Autofill" />
@@ -98,6 +110,7 @@
                     android:id="@+id/gitlab_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@{viewModel.storedEmployeeInfo.gitlab}"
                     android:hint="@string/gitlab_hint"
                     android:inputType="textEmailAddress"
                     tools:ignore="Autofill" />

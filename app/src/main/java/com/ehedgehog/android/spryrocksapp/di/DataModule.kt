@@ -3,11 +3,13 @@ package com.ehedgehog.android.spryrocksapp.di
 import com.ehedgehog.android.spryrocksapp.BuildConfig
 import com.ehedgehog.android.spryrocksapp.network.AuthInterceptor
 import com.ehedgehog.android.spryrocksapp.network.TrelloApiService
+import com.ehedgehog.android.spryrocksapp.screens.DatabaseManager
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
+import io.realm.Realm
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -49,6 +51,18 @@ class DataModule {
             .addInterceptor(HttpLoggingInterceptor())
             .addInterceptor(AuthInterceptor())
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideRealmInstance(): Realm {
+        return Realm.getDefaultInstance()
+    }
+
+    @Provides
+    @Singleton
+    fun provideDatabaseManager(realm: Realm): DatabaseManager {
+        return DatabaseManager(realm)
     }
 
 }

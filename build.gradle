@@ -16,6 +16,9 @@ buildscript {
         version_okhttp = "2.0.0"
         version_logging_interceptor = "4.1.0"
         version_dagger = "2.24"
+        version_gradle = "3.5.2"
+        version_safe_args_plugin = "1.0.0"
+        version_realm_plugin = "5.9.1"
     }
     repositories {
         google()
@@ -23,9 +26,10 @@ buildscript {
         
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.2'
+        classpath "com.android.tools.build:gradle:$version_gradle"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$version_kotlin"
-        classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:1.0.0"
+        classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:$version_safe_args_plugin"
+        classpath "io.realm:realm-gradle-plugin:$version_realm_plugin"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
