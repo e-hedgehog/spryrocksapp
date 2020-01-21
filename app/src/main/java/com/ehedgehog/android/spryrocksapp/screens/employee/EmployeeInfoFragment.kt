@@ -52,25 +52,29 @@ class EmployeeInfoFragment : Fragment() {
     }
 
     private fun updateEmployeeInfo(employeeInfo: EmployeeInfo) {
-        binding.nameField.setText(employeeInfo.name, TextView.BufferType.EDITABLE)
-        binding.positionField.setText(employeeInfo.position, TextView.BufferType.EDITABLE)
-        binding.phoneField.setText(employeeInfo.phone, TextView.BufferType.EDITABLE)
-        binding.telegramField.setText(employeeInfo.telegram, TextView.BufferType.EDITABLE)
-        binding.gmailField.setText(employeeInfo.gmail, TextView.BufferType.EDITABLE)
-        binding.githubField.setText(employeeInfo.github, TextView.BufferType.EDITABLE)
-        binding.gitlabField.setText(employeeInfo.gitlab, TextView.BufferType.EDITABLE)
+        with(binding) {
+            nameField.setText(employeeInfo.name, TextView.BufferType.EDITABLE)
+            positionField.setText(employeeInfo.position, TextView.BufferType.EDITABLE)
+            phoneField.setText(employeeInfo.phone, TextView.BufferType.EDITABLE)
+            telegramField.setText(employeeInfo.telegram, TextView.BufferType.EDITABLE)
+            gmailField.setText(employeeInfo.gmail, TextView.BufferType.EDITABLE)
+            githubField.setText(employeeInfo.github, TextView.BufferType.EDITABLE)
+            gitlabField.setText(employeeInfo.gitlab, TextView.BufferType.EDITABLE)
+        }
     }
 
     private fun createNewCard() {
-        val info = EmployeeInfo(
-            binding.nameField.text.toString(),
-            binding.positionField.text.toString(),
-            binding.phoneField.text.toString(),
-            binding.telegramField.text.toString(),
-            binding.gmailField.text.toString(),
-            binding.githubField.text.toString(),
-            binding.gitlabField.text.toString()
-        )
+        val info = with(binding) {
+            EmployeeInfo(
+                nameField.text.toString(),
+                positionField.text.toString(),
+                phoneField.text.toString(),
+                telegramField.text.toString(),
+                gmailField.text.toString(),
+                githubField.text.toString(),
+                gitlabField.text.toString()
+            )
+        }
 
         if (info.name!!.isEmpty() || info.position!!.isEmpty() || info.phone!!.isEmpty() || info.telegram!!.isEmpty() ||
             info.gmail!!.isEmpty() || info.github!!.isEmpty() || info.gitlab!!.isEmpty()
