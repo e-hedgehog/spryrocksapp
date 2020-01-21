@@ -13,13 +13,13 @@ data class CardResponse(
 )
 
 open class EmployeeInfo(
-    @PrimaryKey var name: String? = "",
-    var position: String? = "",
-    var phone: String? = "",
-    var telegram: String? = "",
-    var gmail: String? = "",
-    var github: String? = "",
-    var gitlab: String? = ""
+    @PrimaryKey var name: String = "",
+    var position: String = "",
+    var phone: String = "",
+    var telegram: String = "",
+    var gmail: String = "",
+    var github: String = "",
+    var gitlab: String = ""
 ) : RealmObject() {
     override fun toString(): String {
         return "Name: $name\n" +
