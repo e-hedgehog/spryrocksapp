@@ -13,6 +13,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 class EmployeeInfoViewModel : ViewModel() {
@@ -37,6 +38,9 @@ class EmployeeInfoViewModel : ViewModel() {
 
     private val _storedEmployeeInfo = MutableLiveData<EmployeeInfo>()
     val storedEmployeeInfo: LiveData<EmployeeInfo> get() = _storedEmployeeInfo
+
+    private val _birthDate = MutableLiveData<Date>()
+    val birthDate: LiveData<Date> get() = _birthDate
 
     init {
         Application.appComponent.injectEmpoyeeInfoViewModel(this)
@@ -75,7 +79,7 @@ class EmployeeInfoViewModel : ViewModel() {
                 employeeList = createDefaultListInBoard()
             }
 
-            val cardsDeferred = employeeInfo.name?.let {
+            val cardsDeferred = employeeInfo.name.let {
                 if (cardId == null)
                     apiService.createCardInBoardList(employeeList.id, it, employeeInfo.toString())
                 else
@@ -83,7 +87,7 @@ class EmployeeInfoViewModel : ViewModel() {
             }
 
             databaseManager.saveCurrentEmployee(employeeInfo)
-            _cardId.value = cardsDeferred?.await()?.id
+            _cardId.value = cardsDeferred.await().id
             _eventInfoSent.value = true
 
         }
@@ -99,6 +103,10 @@ class EmployeeInfoViewModel : ViewModel() {
 
     fun onInfoSendComplete() {
         _eventInfoSent.value = false
+    }
+
+    fun setBirthDate(date: Date) {
+        _birthDate.value = date
     }
 
     override fun onCleared() {

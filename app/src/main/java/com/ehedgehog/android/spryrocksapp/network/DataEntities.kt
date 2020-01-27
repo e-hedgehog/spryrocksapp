@@ -14,6 +14,7 @@ data class CardResponse(
 
 open class EmployeeInfo(
     @PrimaryKey var name: String = "",
+    var birthDate: String = "",
     var position: String = "",
     var phone: String = "",
     var telegram: String = "",
@@ -23,6 +24,7 @@ open class EmployeeInfo(
 ) : RealmObject() {
     override fun toString(): String {
         return "Name: $name\n" +
+                "Birth date: $birthDate\n" +
                 "Position: $position\n" +
                 "Phone: $phone\n" +
                 "Telegram: $telegram\n" +

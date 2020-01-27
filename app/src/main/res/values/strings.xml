@@ -33,4 +33,6 @@
         Если перед тобой стоит большая задача, требующая большого количества времени - разбей её на подзадачи.</string>
     <string name="rule_6">6. Не стоит разукрашивать официальный документ в серо-буро-малиновые цвета.</string>
     <string name="rule_7">7. В конце КАЖДОГО рабочего дня отчёт нужно копировать и отправлять руководителю в Телеграме.</string>
+    <string name="date_button_label">Set birth date</string>
+    <string name="date_format">dd MMMM yyyy</string>
 </resources>
