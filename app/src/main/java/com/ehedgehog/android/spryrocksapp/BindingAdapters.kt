@@ -3,7 +3,7 @@ package com.ehedgehog.android.spryrocksapp
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ehedgehog.android.spryrocksapp.network.Task
-import com.ehedgehog.android.spryrocksapp.screens.tracker.TasksAdapter
+import com.ehedgehog.android.spryrocksapp.screens.taskList.TasksAdapter
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Task>?) {

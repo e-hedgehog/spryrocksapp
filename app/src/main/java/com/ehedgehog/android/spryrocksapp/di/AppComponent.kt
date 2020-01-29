@@ -1,7 +1,7 @@
 package com.ehedgehog.android.spryrocksapp.di
 
 import com.ehedgehog.android.spryrocksapp.screens.employee.EmployeeInfoViewModel
-import com.ehedgehog.android.spryrocksapp.screens.tracker.TasksTrackerViewModel
+import com.ehedgehog.android.spryrocksapp.screens.taskList.TasksTrackerViewModel
 import dagger.Component
 import javax.inject.Singleton
 

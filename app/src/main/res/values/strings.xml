@@ -36,4 +36,6 @@
     <string name="date_button_label">Set birth date</string>
     <string name="date_format">dd MMMM yyyy</string>
     <string name="tasks_tracker_button">Tasks tracker</string>
+    <string name="project_name_hint">Enter project name</string>
+    <string name="task_description_field">Enter task description</string>
 </resources>
