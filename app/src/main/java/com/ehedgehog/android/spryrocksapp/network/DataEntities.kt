@@ -12,6 +12,12 @@ data class CardResponse(
     val id: String
 )
 
+open class Task(
+    var id: Int = 0,
+    var projectName: String = "",
+    var taskDescription: String = ""
+): RealmObject()
+
 open class EmployeeInfo(
     @PrimaryKey var name: String = "",
     var birthDate: String = "",

@@ -43,7 +43,7 @@ class EmployeeInfoViewModel : ViewModel() {
     val birthDate: LiveData<Date> get() = _birthDate
 
     init {
-        Application.appComponent.injectEmpoyeeInfoViewModel(this)
+        Application.appComponent.injectEmployeeInfoViewModel(this)
     }
 
     fun loadBoardLists() {

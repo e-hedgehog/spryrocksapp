@@ -35,6 +35,10 @@ class DashboardFragment: Fragment() {
             findNavController().navigate(DashboardFragmentDirections.actionDashboardToReportingRules())
         }
 
+        binding.timeTracker.setOnClickListener {
+            findNavController().navigate(DashboardFragmentDirections.actionDashboardToTasksTracker())
+        }
+
         return binding.root
     }
 
