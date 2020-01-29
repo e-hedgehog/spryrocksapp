@@ -9,36 +9,51 @@
             type="com.ehedgehog.android.spryrocksapp.network.Task" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.cardview.widget.CardView
+        android:id="@+id/list_item_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/darker_gray"
-        android:layout_margin="4dp">
+        android:layout_margin="4dp"
+        app:cardBackgroundColor="@color/colorCard"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="8dp">
 
-        <TextView
-            android:id="@+id/projectNameField"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="@{task.projectName}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Project1" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/taskDescriptionField"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@{task.taskDescription}"
-            app:layout_constraintEnd_toEndOf="@id/projectNameField"
-            app:layout_constraintStart_toStartOf="@id/projectNameField"
-            app:layout_constraintTop_toBottomOf="@id/projectNameField"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:text="Do something" />
+            <TextView
+                android:id="@+id/projectNameField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:text="@{task.projectName}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Project1" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/taskDescriptionField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:text="@{task.taskDescription}"
+                app:layout_constraintEnd_toEndOf="@id/projectNameField"
+                app:layout_constraintStart_toStartOf="@id/projectNameField"
+                app:layout_constraintTop_toBottomOf="@id/projectNameField"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="Do something" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </layout>
