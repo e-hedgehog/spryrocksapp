@@ -18,13 +18,10 @@ class TasksTrackerViewModel: ViewModel() {
 
     init {
         Application.appComponent.injectTasksTrackerViewModel(this)
-        loadStoredTasks()
     }
 
-    private fun loadStoredTasks() {
-//        _listTasks.value = databaseManager.getStoredTasks()
-        _listTasks.value =
-            listOf(Task(1,"Project1", "do something"), Task(2,"Project2", "do something else"))
+    fun loadStoredTasks() {
+        _listTasks.value = databaseManager.getStoredTasks()
     }
 
 }

@@ -18,9 +18,17 @@ class DatabaseManager(val realm: Realm) {
         return realm.copyFromRealm(employee)
     }
 
-    fun saveNewTask(task: Task) {
+    fun saveNewTask(projectName: String, taskDescription:String) {
         realm.executeTransaction { realm ->
-            realm.insert(task)
+            val maxId: Number? = realm.where(Task::class.java).max("id")
+            val nextId = maxId?.toInt()?.inc() ?: 1
+            realm.insert(Task(nextId, projectName, taskDescription))
+        }
+    }
+
+    fun updateTask(task: Task) {
+        realm.executeTransaction { realm ->
+            realm.copyToRealmOrUpdate(task)
         }
     }
 

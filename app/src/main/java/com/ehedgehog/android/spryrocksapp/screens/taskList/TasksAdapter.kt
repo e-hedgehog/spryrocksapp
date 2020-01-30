@@ -10,7 +10,7 @@ import com.ehedgehog.android.spryrocksapp.R
 import com.ehedgehog.android.spryrocksapp.databinding.ItemListTaskBinding
 import com.ehedgehog.android.spryrocksapp.network.Task
 
-class TasksAdapter : ListAdapter<Task, TasksAdapter.TaskViewHolder>(DiffCallback) {
+class TasksAdapter(private val onClickListener: OnClickListener) : ListAdapter<Task, TasksAdapter.TaskViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         return TaskViewHolder(
@@ -24,7 +24,9 @@ class TasksAdapter : ListAdapter<Task, TasksAdapter.TaskViewHolder>(DiffCallback
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val task = getItem(position)
+        holder.itemView.setOnClickListener { onClickListener.onClick(task) }
+        holder.bind(task)
     }
 
     companion object DiffCallback: DiffUtil.ItemCallback<Task>() {
@@ -42,6 +44,10 @@ class TasksAdapter : ListAdapter<Task, TasksAdapter.TaskViewHolder>(DiffCallback
             binding.task = task
             binding.executePendingBindings()
         }
+    }
+
+    class OnClickListener(val clickListener: (task: Task) -> Unit) {
+        fun onClick(task: Task) = clickListener(task)
     }
 
 }

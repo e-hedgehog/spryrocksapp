@@ -1,7 +1,9 @@
 package com.ehedgehog.android.spryrocksapp.network
 
+import android.os.Parcelable
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
 data class BoardList(
     val id: String,
@@ -12,11 +14,12 @@ data class CardResponse(
     val id: String
 )
 
+@Parcelize
 open class Task(
-    var id: Int = 0,
+    @PrimaryKey var id: Int = 0,
     var projectName: String = "",
     var taskDescription: String = ""
-): RealmObject()
+): RealmObject(), Parcelable
 
 open class EmployeeInfo(
     @PrimaryKey var name: String = "",

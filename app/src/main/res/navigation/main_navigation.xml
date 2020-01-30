@@ -56,5 +56,10 @@
     <fragment
         android:id="@+id/taskDetailsFragment"
         android:name="com.ehedgehog.android.spryrocksapp.screens.taskList.TaskDetailsFragment"
-        android:label="Task Details" />
+        android:label="Task Details" >
+        <argument
+            android:name="task"
+            app:argType="com.ehedgehog.android.spryrocksapp.network.Task"
+            app:nullable="true" />
+    </fragment>
 </navigation>

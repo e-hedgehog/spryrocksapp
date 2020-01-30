@@ -27,10 +27,14 @@ class TasksTrackerFragment: Fragment() {
         binding.viewModel = viewModel
 
         binding.newTaskButton.setOnClickListener {
-            findNavController().navigate(TasksTrackerFragmentDirections.actionTasksTrackerToTaskDetails())
+            findNavController().navigate(TasksTrackerFragmentDirections.actionTasksTrackerToTaskDetails(null))
         }
 
-        binding.trackerRecyclerView.adapter = TasksAdapter()
+        binding.trackerRecyclerView.adapter = TasksAdapter(TasksAdapter.OnClickListener {
+            findNavController().navigate(TasksTrackerFragmentDirections.actionTasksTrackerToTaskDetails(it))
+        })
+
+        viewModel.loadStoredTasks()
 
         return binding.root
     }
