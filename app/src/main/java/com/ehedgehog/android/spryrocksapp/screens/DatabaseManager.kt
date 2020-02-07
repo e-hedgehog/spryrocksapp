@@ -32,6 +32,11 @@ class DatabaseManager(val realm: Realm) {
         }
     }
 
+    fun getTaskById(id: Int): Task? {
+        val storedTask = realm.where(Task::class.java).equalTo("id", id).findFirst()
+        return realm.copyFromRealm(storedTask)
+    }
+
     fun getStoredTasks(): List<Task> {
         val listTasks = realm.where(Task::class.java).findAll()
         return realm.copyFromRealm(listTasks)

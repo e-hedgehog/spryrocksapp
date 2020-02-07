@@ -39,4 +39,5 @@
     <string name="project_name_hint">Enter project name</string>
     <string name="task_description_field">Enter task description</string>
     <string name="create_label">Create</string>
+    <string name="timer_text">%1$s:%2$s:%3$s</string>
 </resources>

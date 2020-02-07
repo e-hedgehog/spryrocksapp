@@ -19,6 +19,8 @@ buildscript {
         version_gradle = "3.5.2"
         version_safe_args_plugin = "1.0.0"
         version_realm_plugin = "5.9.1"
+        version_rxjava = "2.2.12"
+        version_rxandroid = "2.1.1"
     }
     repositories {
         google()

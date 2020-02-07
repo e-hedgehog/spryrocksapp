@@ -15,10 +15,21 @@ data class CardResponse(
 )
 
 @Parcelize
+open class Time(
+    var hours: Long = 0,
+    var minutes: Long = 0,
+    var seconds: Long = 0,
+    var totalSeconds: Long = 0
+): RealmObject(), Parcelable
+
+@Parcelize
 open class Task(
     @PrimaryKey var id: Int = 0,
     var projectName: String = "",
-    var taskDescription: String = ""
+    var taskDescription: String = "",
+    var time: Time? = null,
+    var lastPause: Long = 0,
+    var isStarted: Boolean = false
 ): RealmObject(), Parcelable
 
 open class EmployeeInfo(

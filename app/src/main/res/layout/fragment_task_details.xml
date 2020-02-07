@@ -26,6 +26,53 @@
             android:inputType="text"
             tools:ignore="Autofill" />
 
+        <LinearLayout
+            android:id="@+id/timer_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:visibility="gone"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/task_timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="0:00:00"
+                android:textColor="@android:color/black"
+                android:textSize="32sp"
+                tools:text="0:00:32" />
+
+            <ImageButton
+                android:id="@+id/start_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:tint="@color/colorAccent"
+                android:src="@android:drawable/ic_media_play"
+                tools:ignore="ContentDescription" />
+
+            <ImageButton
+                android:id="@+id/stop_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:tint="@color/colorAccent"
+                android:visibility="gone"
+                android:src="@android:drawable/ic_media_pause"
+                tools:ignore="ContentDescription" />
+
+            <ImageButton
+                android:id="@+id/reset_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:tint="@color/colorAccent"
+                android:src="@android:drawable/ic_menu_revert"
+                tools:ignore="ContentDescription" />
+
+        </LinearLayout>
+
         <EditText
             android:id="@+id/description_field"
             android:layout_width="match_parent"
