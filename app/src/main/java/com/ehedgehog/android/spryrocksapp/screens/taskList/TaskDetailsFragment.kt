@@ -39,7 +39,8 @@ class TaskDetailsFragment : Fragment() {
         binding.viewModel = viewModel
 
         val currentTaskId = TaskDetailsFragmentArgs.fromBundle(arguments!!).taskId
-        currentTask = viewModel.getTaskById(currentTaskId)
+        if (currentTaskId != -1)
+            currentTask = viewModel.getTaskById(currentTaskId)
 
         currentTask?.let {
             viewModel.initTask(it)
