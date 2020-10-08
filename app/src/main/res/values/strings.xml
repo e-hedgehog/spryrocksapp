@@ -40,4 +40,5 @@
     <string name="task_description_field">Enter task description</string>
     <string name="create_label">Create</string>
     <string name="timer_text">%1$s:%2$s:%3$s</string>
+    <string name="default_timer_text">0:00:00</string>
 </resources>

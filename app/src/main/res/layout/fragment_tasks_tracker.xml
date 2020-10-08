@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -23,7 +24,8 @@
                 android:padding="4dp"
                 android:clipToPadding="false"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:listData="@{viewModel.listTasks}"/>
+                app:listData="@{viewModel.listTasks}"
+                tools:listitem="@layout/item_list_task"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -5,6 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.ehedgehog.android.spryrocksapp.screens.taskList.TaskDetailsViewModel" />
@@ -31,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:visibility="gone"
+            android:visibility="@{viewModel.isNewTask.booleanValue() ? View.GONE : View.VISIBLE}"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             tools:visibility="visible">
@@ -41,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="0:00:00"
+                android:text="@string/default_timer_text"
                 android:textColor="@android:color/black"
                 android:textSize="32sp"
                 tools:text="0:00:32" />
@@ -51,7 +53,9 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:tint="@color/colorAccent"
+                android:visibility="@{viewModel.isTimerStarted.booleanValue() ? View.GONE : View.VISIBLE}"
                 android:src="@android:drawable/ic_media_play"
+                android:onClick="@{() -> viewModel.onStartTimer()}"
                 tools:ignore="ContentDescription" />
 
             <ImageButton
@@ -59,8 +63,9 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:tint="@color/colorAccent"
-                android:visibility="gone"
+                android:visibility="@{viewModel.isTimerStarted.booleanValue() ? View.VISIBLE : View.GONE}"
                 android:src="@android:drawable/ic_media_pause"
+                android:onClick="@{() -> viewModel.onStopTimer()}"
                 tools:ignore="ContentDescription" />
 
             <ImageButton
@@ -69,6 +74,7 @@
                 android:layout_height="48dp"
                 android:tint="@color/colorAccent"
                 android:src="@android:drawable/ic_menu_revert"
+                android:onClick="@{() -> viewModel.onResetTimer()}"
                 tools:ignore="ContentDescription" />
 
         </LinearLayout>

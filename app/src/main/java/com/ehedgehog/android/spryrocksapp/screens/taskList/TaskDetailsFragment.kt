@@ -12,16 +12,12 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.ehedgehog.android.spryrocksapp.R
 import com.ehedgehog.android.spryrocksapp.databinding.FragmentTaskDetailsBinding
-import com.ehedgehog.android.spryrocksapp.network.Task
 import java.text.DecimalFormat
-import java.util.*
 
 class TaskDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentTaskDetailsBinding
     private lateinit var viewModel: TaskDetailsViewModel
-
-    private var currentTask: Task? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,58 +36,11 @@ class TaskDetailsFragment : Fragment() {
 
         val currentTaskId = TaskDetailsFragmentArgs.fromBundle(arguments!!).taskId
         if (currentTaskId != -1)
-            currentTask = viewModel.getTaskById(currentTaskId)
+            viewModel.initTaskById(currentTaskId)
 
-        currentTask?.let {
-            viewModel.initTask(it)
-
-            if (it.isStarted) {
-                binding.stopButton.visibility = View.VISIBLE
-                binding.startButton.visibility = View.GONE
-                val currentTime = Date().time
-                val interval = (currentTime - it.lastPause) / 1000
-                viewModel.startTimer(it.time, interval)
-            }
-
-            viewModel.isNewTask = false
-            binding.timerContainer.visibility = View.VISIBLE
-        }
-
-        binding.startButton.setOnClickListener {
-            currentTask?.let {task ->
-                task.isStarted = true
-                viewModel.updateCurrentTask(task)
-            }
-
-            it.visibility = View.GONE
-            binding.stopButton.visibility = View.VISIBLE
-            if (currentTask != null)
-                viewModel.startTimer(currentTask!!.time, 0)
-            else viewModel.startTimer(null, null)
-
-        }
-
-        binding.stopButton.setOnClickListener {
-            currentTask?.let {task ->
-                task.isStarted = false
-                task.time = viewModel.time.value
-                task.lastPause = 0
-                viewModel.updateCurrentTask(task)
-            }
-            it.visibility = View.GONE
-            binding.startButton.visibility = View.VISIBLE
-            viewModel.stopTimer()
-        }
-
-        binding.resetButton.setOnClickListener {
-            currentTask?.let {task ->
-                viewModel.resetCurrentTask(task)
-            }
-
-            binding.stopButton.visibility = View.GONE
-            binding.startButton.visibility = View.VISIBLE
-            viewModel.stopTimer()
-        }
+        viewModel.currentTask.observe(this, Observer {
+            viewModel.onInitializeTask(it)
+        })
 
         viewModel.time.observe(this, Observer {
             if (it != null) {
@@ -113,14 +62,13 @@ class TaskDetailsFragment : Fragment() {
 
         val createItem = menu.findItem(R.id.menu_create_task)
         createItem.setOnMenuItemClickListener {
-            if (viewModel.taskDescription.value.isNullOrEmpty()) {
-                Toast.makeText(context, "Task description required", Toast.LENGTH_SHORT).show()
-            } else {
-                if (viewModel.isNewTask)
-                    viewModel.saveTask()
-                else
-                    currentTask?.let { task -> viewModel.updateCurrentTask(task) }
-                findNavController().navigateUp()
+            when {
+                viewModel.projectName.value.isNullOrEmpty() -> Toast.makeText(context, "Project name required", Toast.LENGTH_SHORT).show()
+                viewModel.taskDescription.value.isNullOrEmpty() -> Toast.makeText(context, "Task description required", Toast.LENGTH_SHORT).show()
+                else -> {
+                    viewModel.onSaveCurrentTask()
+                    findNavController().navigateUp()
+                }
             }
             true
         }
@@ -134,14 +82,7 @@ class TaskDetailsFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
-        currentTask?.let {
-            if (it.isStarted) {
-                viewModel.stopTimer()
-                it.time = viewModel.time.value
-                it.lastPause = Date().time
-                viewModel.updateCurrentTask(it)
-            }
-        }
+        viewModel.onPauseTimer()
     }
 
 }

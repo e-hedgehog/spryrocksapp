@@ -18,10 +18,17 @@ class TaskDetailsViewModel : ViewModel() {
     val projectName = MutableLiveData<String>()
     val taskDescription = MutableLiveData<String>()
 
+    private val _currentTask = MutableLiveData<Task>()
+    val currentTask: LiveData<Task> get() = _currentTask
+
     private val _time = MutableLiveData<Time>()
     val time: LiveData<Time> get() = _time
 
-    var isNewTask = true
+    private val _isTimerStarted = MutableLiveData<Boolean>()
+    val isTimerStarted: LiveData<Boolean> get() = _isTimerStarted
+
+    private val _isNewTask = MutableLiveData<Boolean>()
+    val isNewTask: LiveData<Boolean> get() = _isNewTask
 
     private var timerDisposable: Disposable? = null
 
@@ -30,23 +37,88 @@ class TaskDetailsViewModel : ViewModel() {
 
     init {
         Application.appComponent.injectTasksDetailsViewModel(this)
+        _isNewTask.value = true
     }
 
-    fun saveTask() {
+    fun onInitializeTask(currentTask: Task?) {
+        currentTask?.let {
+            initTask(it)
+
+            if (it.isStarted) {
+                _isTimerStarted.value = true
+                val currentTime = Date().time
+                val interval = (currentTime - it.lastPause) / 1000
+                startTimer(it.time, interval)
+            }
+
+            _isNewTask.value = false
+        }
+    }
+
+    fun onStartTimer() {
+        currentTask.value?.let {task ->
+            task.isStarted = true
+            updateCurrentTask(task)
+        }
+
+        _isTimerStarted.value = true
+        if (currentTask.value != null)
+            startTimer(currentTask.value!!.time, 0)
+        else startTimer(null, null)
+    }
+
+    fun onPauseTimer() {
+        currentTask.value?.let {
+            if (it.isStarted) {
+                stopTimer()
+                it.time = time.value
+                it.lastPause = Date().time
+                updateCurrentTask(it)
+            }
+        }
+    }
+
+    fun onStopTimer() {
+        currentTask.value?.let {task ->
+            task.isStarted = false
+            task.time = time.value
+            task.lastPause = 0
+            updateCurrentTask(task)
+        }
+
+        _isTimerStarted.value = false
+        stopTimer()
+    }
+
+    fun onResetTimer() {
+        currentTask.value?.let {task -> resetCurrentTask(task)}
+
+        _isTimerStarted.value = false
+        stopTimer()
+    }
+
+    fun onSaveCurrentTask() {
+        if (isNewTask.value!!)
+            saveTask()
+        else
+            currentTask.value?.let { task -> updateCurrentTask(task) }
+    }
+
+    fun initTaskById(id: Int) {
+        _currentTask.value = databaseManager.getTaskById(id)
+    }
+
+    private fun saveTask() {
         databaseManager.saveNewTask(projectName.value!!, taskDescription.value!!)
     }
 
-    fun getTaskById(id: Int): Task? {
-        return databaseManager.getTaskById(id)
-    }
-
-    fun updateCurrentTask(task: Task) {
+    private fun updateCurrentTask(task: Task) {
         task.projectName = projectName.value!!
         task.taskDescription = taskDescription.value!!
         databaseManager.updateTask(task)
     }
 
-    fun resetCurrentTask(task: Task) {
+    private fun resetCurrentTask(task: Task) {
         task.isStarted = false
         task.time = Time(0, 0, 0, 0)
         task.lastPause = 0
@@ -54,7 +126,7 @@ class TaskDetailsViewModel : ViewModel() {
         _time.value = task.time
     }
 
-    fun initTask(task: Task) {
+    private fun initTask(task: Task) {
         projectName.value = task.projectName
         taskDescription.value = task.taskDescription
         if (task.isStarted) {
@@ -69,8 +141,8 @@ class TaskDetailsViewModel : ViewModel() {
         _time.value = task.time
     }
 
-    fun startTimer(storedTime: Time?, interval: Long?) {
-        timerDisposable = Observable.interval(1, TimeUnit.SECONDS)
+    private fun startTimer(storedTime: Time?, interval: Long?) {
+        timerDisposable = Observable.interval(0,1, TimeUnit.SECONDS)
             .subscribe { time ->
 
                 var newTime = time
@@ -90,7 +162,7 @@ class TaskDetailsViewModel : ViewModel() {
             }
     }
 
-    fun stopTimer() {
+    private fun stopTimer() {
         if (timerDisposable != null) {
             timerDisposable!!.dispose()
             timerDisposable = null
