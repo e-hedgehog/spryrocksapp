@@ -43,15 +43,18 @@ class TaskDetailsViewModel : ViewModel() {
     fun onInitializeTask(currentTask: Task?) {
         currentTask?.let {
             initTask(it)
+            _isNewTask.value = false
+        }
+    }
 
+    fun unpauseTimerIfStarted() {
+        currentTask.value?.let {
             if (it.isStarted) {
                 _isTimerStarted.value = true
                 val currentTime = Date().time
                 val interval = (currentTime - it.lastPause) / 1000
                 startTimer(it.time, interval)
             }
-
-            _isNewTask.value = false
         }
     }
 
