@@ -4,6 +4,7 @@ import android.os.Parcelable
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import kotlinx.android.parcel.Parcelize
+import java.text.DecimalFormat
 
 data class BoardList(
     val id: String,
@@ -20,7 +21,15 @@ open class Time(
     var minutes: Long = 0,
     var seconds: Long = 0,
     var totalSeconds: Long = 0
-): RealmObject(), Parcelable
+): RealmObject(), Parcelable {
+    override fun toString(): String {
+        val formatter = DecimalFormat("00")
+        val hoursString = hours.toString()
+        val minutesString = formatter.format(minutes)
+        val secondsString = formatter.format(seconds)
+        return "$hoursString:$minutesString:$secondsString"
+    }
+}
 
 @Parcelize
 open class Task(

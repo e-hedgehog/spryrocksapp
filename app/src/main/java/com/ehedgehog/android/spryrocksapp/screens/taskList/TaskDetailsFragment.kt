@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.ehedgehog.android.spryrocksapp.R
 import com.ehedgehog.android.spryrocksapp.databinding.FragmentTaskDetailsBinding
-import java.text.DecimalFormat
 
 class TaskDetailsFragment : Fragment() {
 
@@ -40,17 +39,6 @@ class TaskDetailsFragment : Fragment() {
 
         viewModel.currentTask.observe(this, Observer {
             viewModel.onInitializeTask(it)
-        })
-
-        viewModel.timerManager.time.observe(this, Observer {
-            if (it != null) {
-                val formatter = DecimalFormat("00")
-                val hoursString = it.hours.toString()
-                val minutesString = formatter.format(it.minutes)
-                val secondsString = formatter.format(it.seconds)
-                binding.taskTimer.text =
-                    getString(R.string.timer_text, hoursString, minutesString, secondsString)
-            }
         })
 
         return binding.root
