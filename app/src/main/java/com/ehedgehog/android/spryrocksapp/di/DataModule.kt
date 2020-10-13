@@ -4,6 +4,8 @@ import com.ehedgehog.android.spryrocksapp.BuildConfig
 import com.ehedgehog.android.spryrocksapp.network.AuthInterceptor
 import com.ehedgehog.android.spryrocksapp.network.TrelloApiService
 import com.ehedgehog.android.spryrocksapp.screens.DatabaseManager
+import com.ehedgehog.android.spryrocksapp.screens.TaskTimerManager
+import com.ehedgehog.android.spryrocksapp.screens.TimerUseCase
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -63,6 +65,18 @@ class DataModule {
     @Singleton
     fun provideDatabaseManager(realm: Realm): DatabaseManager {
         return DatabaseManager(realm)
+    }
+
+    @Provides
+    @Singleton
+    fun provideTimerUseCase(): TimerUseCase {
+        return TimerUseCase()
+    }
+
+    @Provides
+    @Singleton
+    fun provideTaskTimerManager(timerUseCase: TimerUseCase, databaseManager: DatabaseManager): TaskTimerManager {
+        return TaskTimerManager(timerUseCase, databaseManager)
     }
 
 }

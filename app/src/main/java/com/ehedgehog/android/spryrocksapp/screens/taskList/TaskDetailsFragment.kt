@@ -42,7 +42,7 @@ class TaskDetailsFragment : Fragment() {
             viewModel.onInitializeTask(it)
         })
 
-        viewModel.time.observe(this, Observer {
+        viewModel.timerManager.time.observe(this, Observer {
             if (it != null) {
                 val formatter = DecimalFormat("00")
                 val hoursString = it.hours.toString()

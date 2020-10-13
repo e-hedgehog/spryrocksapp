@@ -53,7 +53,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:tint="@color/colorAccent"
-                android:visibility="@{viewModel.isTimerStarted.booleanValue() ? View.GONE : View.VISIBLE}"
+                android:visibility="@{viewModel.timerManager.isTimerStarted.booleanValue() ? View.GONE : View.VISIBLE}"
                 android:src="@android:drawable/ic_media_play"
                 android:onClick="@{() -> viewModel.onStartTimer()}"
                 tools:ignore="ContentDescription" />
@@ -63,7 +63,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:tint="@color/colorAccent"
-                android:visibility="@{viewModel.isTimerStarted.booleanValue() ? View.VISIBLE : View.GONE}"
+                android:visibility="@{viewModel.timerManager.isTimerStarted.booleanValue() ? View.VISIBLE : View.GONE}"
                 android:src="@android:drawable/ic_media_pause"
                 android:onClick="@{() -> viewModel.onStopTimer()}"
                 tools:ignore="ContentDescription" />
