@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.ehedgehog.android.spryrocksapp.screens.taskList.TasksTrackerViewModel" />
@@ -17,14 +19,87 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/tracker_active_task"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:visibility="@{viewModel.currentTask != null ? View.VISIBLE : View.GONE}"
+                app:cardBackgroundColor="@color/colorAccent"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/active_task_project"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="24dp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:text="@{viewModel.currentTask.projectName}"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Project name" />
+
+                    <TextView
+                        android:id="@+id/active_task_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@{viewModel.currentTask.time.toString()}"
+                        android:textColor="@android:color/white"
+                        android:textSize="26sp"
+                        app:layout_constraintStart_toStartOf="@id/active_task_project"
+                        app:layout_constraintTop_toBottomOf="@id/active_task_project"
+                        tools:text="0:01:24" />
+
+                    <TextView
+                        android:id="@+id/active_task_description"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:ellipsize="end"
+                        android:maxLines="3"
+                        android:text="@{viewModel.currentTask.taskDescription}"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/active_task_project"
+                        app:layout_constraintStart_toStartOf="@id/active_task_time"
+                        app:layout_constraintTop_toBottomOf="@id/active_task_time"
+                        tools:text="@tools:sample/lorem/random" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/tracker_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:padding="4dp"
                 android:clipToPadding="false"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:listData="@{viewModel.listTasks}"
+                app:layout_constraintTop_toBottomOf="@id/tracker_active_task"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 tools:listitem="@layout/item_list_task"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -39,6 +114,7 @@
             android:backgroundTint="@color/colorPrimaryDark"
             android:src="@drawable/ic_add_task"
             android:tint="@android:color/white"
+            android:onClick="@{() -> viewModel.displayTaskDetails(-1)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

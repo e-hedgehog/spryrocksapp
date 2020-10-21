@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.ehedgehog.android.spryrocksapp.R
@@ -26,15 +27,19 @@ class TasksTrackerFragment: Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        binding.newTaskButton.setOnClickListener {
-            findNavController().navigate(TasksTrackerFragmentDirections.actionTasksTrackerToTaskDetails())
-        }
-
         binding.trackerRecyclerView.adapter = TasksAdapter(TasksAdapter.OnClickListener {
-            findNavController().navigate(TasksTrackerFragmentDirections.actionTasksTrackerToTaskDetails(it.id))
+            viewModel.displayTaskDetails(it.id)
+        })
+
+        viewModel.navigateToSelectedTaskById.observe(this, Observer {taskId ->
+            if (taskId != null) {
+                findNavController().navigate(TasksTrackerFragmentDirections.actionTasksTrackerToTaskDetails(taskId))
+                viewModel.displayTaskDetailsComplete()
+            }
         })
 
         viewModel.loadStoredTasks()
+        viewModel.initCurrentTask()
 
         return binding.root
     }
