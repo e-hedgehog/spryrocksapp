@@ -34,12 +34,17 @@ class DatabaseManager(val realm: Realm) {
 
     fun getTaskById(id: Int): Task? {
         val storedTask = realm.where(Task::class.java).equalTo("id", id).findFirst()
-        return realm.copyFromRealm(storedTask)
+        return if (storedTask != null) realm.copyFromRealm(storedTask) else null
     }
 
     fun getStoredTasks(): List<Task> {
         val listTasks = realm.where(Task::class.java).findAll()
         return realm.copyFromRealm(listTasks)
+    }
+
+    fun getStartedTask(): Task? {
+        val storedTask = realm.where(Task::class.java).equalTo("isStarted", true).findFirst()
+        return if (storedTask != null) realm.copyFromRealm(storedTask) else null
     }
 
 }
