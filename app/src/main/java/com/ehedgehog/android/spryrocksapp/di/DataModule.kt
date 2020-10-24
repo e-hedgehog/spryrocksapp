@@ -68,13 +68,11 @@ class DataModule {
     }
 
     @Provides
-    @Singleton
     fun provideTimerUseCase(): TimerUseCase {
         return TimerUseCase()
     }
 
     @Provides
-    @Singleton
     fun provideTaskTimerManager(timerUseCase: TimerUseCase, databaseManager: DatabaseManager): TaskTimerManager {
         return TaskTimerManager(timerUseCase, databaseManager)
     }

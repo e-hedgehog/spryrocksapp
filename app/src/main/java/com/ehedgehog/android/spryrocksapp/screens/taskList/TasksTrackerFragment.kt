@@ -38,10 +38,22 @@ class TasksTrackerFragment: Fragment() {
             }
         })
 
+        viewModel.currentTask.observe(this, Observer(viewModel::onInitializeCurrentTask))
+
         viewModel.loadStoredTasks()
         viewModel.initCurrentTask()
 
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.unpauseTimer()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.pauseTimer()
     }
 
 }

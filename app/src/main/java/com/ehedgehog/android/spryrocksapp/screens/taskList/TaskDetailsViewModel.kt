@@ -64,7 +64,7 @@ class TaskDetailsViewModel : ViewModel() {
         if (isNewTask.value!!)
             saveTask()
         else
-            currentTask.value?.let { task -> updateCurrentTask(task) }
+            updateCurrentTask()
     }
 
     fun initTaskById(id: Int) {
@@ -75,10 +75,12 @@ class TaskDetailsViewModel : ViewModel() {
         databaseManager.saveNewTask(projectName.value!!, taskDescription.value!!)
     }
 
-    private fun updateCurrentTask(task: Task) {
-        task.projectName = projectName.value!!
-        task.taskDescription = taskDescription.value!!
-        databaseManager.updateTask(task)
+    private fun updateCurrentTask() {
+        currentTask.value?.let { task ->
+            task.projectName = projectName.value!!
+            task.taskDescription = taskDescription.value!!
+            databaseManager.updateTask(task)
+        }
     }
 
     private fun initTask(task: Task) {
