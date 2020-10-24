@@ -24,7 +24,9 @@ class TaskTimerManager(private val timerUseCase: TimerUseCase, private val datab
                 it.seconds = newTime % 60
             }
         }
+
         _time.value = task.time
+        _isTimerStarted.value = task.isStarted
     }
 
     fun unpauseTimerIfStarted(task: Task): Boolean {
@@ -60,13 +62,13 @@ class TaskTimerManager(private val timerUseCase: TimerUseCase, private val datab
         }
 
         _isTimerStarted.value = false
-        stopTimer()
+        stopTimerObservable()
     }
 
     fun pauseTimer(task: Task?) {
         task?.let {
             if (it.isStarted) {
-                stopTimer()
+                stopTimerObservable()
                 it.time = time.value
                 it.lastPause = Date().time
                 databaseManager.updateTask(it)
@@ -84,16 +86,17 @@ class TaskTimerManager(private val timerUseCase: TimerUseCase, private val datab
         }
 
         _isTimerStarted.value = false
-        stopTimer()
+        stopTimerObservable()
     }
 
     private fun startTimerObservable(storedTime: Time?, interval: Long?) {
+        timerUseCase.stopTimer()
         timerUseCase.startTimer(storedTime, interval) { time ->
             _time.postValue(time)
         }
     }
 
-    private fun stopTimer() {
+    private fun stopTimerObservable() {
         timerUseCase.stopTimer()
     }
 

@@ -6,12 +6,16 @@ import androidx.lifecycle.ViewModel
 import com.ehedgehog.android.spryrocksapp.Application
 import com.ehedgehog.android.spryrocksapp.network.Task
 import com.ehedgehog.android.spryrocksapp.screens.DatabaseManager
+import com.ehedgehog.android.spryrocksapp.screens.TaskTimerManager
 import javax.inject.Inject
 
 class TasksTrackerViewModel: ViewModel() {
 
     @Inject
     lateinit var databaseManager: DatabaseManager
+
+    @Inject
+    lateinit var timerManager: TaskTimerManager
 
     private val _listTasks = MutableLiveData<List<Task>>()
     val listTasks: LiveData<List<Task>> get() = _listTasks
@@ -40,6 +44,18 @@ class TasksTrackerViewModel: ViewModel() {
 
     fun displayTaskDetailsComplete() {
         _navigateToSelectedTaskById.value = null
+    }
+
+    fun onInitializeCurrentTask(task: Task?) {
+        task?.let(timerManager::initTimer)
+    }
+
+    fun unpauseTimer() {
+        currentTask.value?.let(timerManager::unpauseTimerIfStarted)
+    }
+
+    fun pauseTimer() {
+        timerManager.pauseTimer(currentTask.value)
     }
 
 }
