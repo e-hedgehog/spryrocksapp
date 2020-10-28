@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.ehedgehog.android.spryrocksapp.R
 import com.ehedgehog.android.spryrocksapp.databinding.FragmentTaskDetailsBinding
 
@@ -21,6 +23,13 @@ class TaskDetailsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+
+        requireActivity().onBackPressedDispatcher.addCallback(this, object: OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                viewModel.onPauseTimer()
+                findNavController().navigateUp()
+            }
+        })
     }
 
     override fun onCreateView(
@@ -55,11 +64,17 @@ class TaskDetailsFragment : Fragment() {
                 viewModel.taskDescription.value.isNullOrEmpty() -> Toast.makeText(context, "Task description required", Toast.LENGTH_SHORT).show()
                 else -> {
                     viewModel.onSaveCurrentTask()
+                    viewModel.onPauseTimer()
                     findNavController().navigateUp()
                 }
             }
             true
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        viewModel.onPauseTimer()
+        return NavigationUI.onNavDestinationSelected(item, findNavController()) || super.onOptionsItemSelected(item)
     }
 
     override fun onStart() {

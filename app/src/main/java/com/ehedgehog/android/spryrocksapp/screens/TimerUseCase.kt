@@ -33,7 +33,7 @@ class TimerUseCase {
         }
 
         val hours = newTime / 3600
-        val minutes = newTime / 60
+        val minutes = (newTime / 60) % 60
         val seconds = newTime % 60
 
         return Time(hours, minutes, seconds, newTime)

@@ -56,4 +56,9 @@ class TasksTrackerFragment: Fragment() {
         viewModel.pauseTimer()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewModel.currentTask.removeObservers(this)
+    }
+
 }
