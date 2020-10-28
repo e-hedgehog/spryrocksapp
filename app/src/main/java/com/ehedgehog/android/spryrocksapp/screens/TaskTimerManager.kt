@@ -20,7 +20,7 @@ class TaskTimerManager(private val timerUseCase: TimerUseCase, private val datab
                 val interval = (Date().time - task.lastPause) / 1000
                 val newTime = interval + it.totalSeconds
                 it.hours = newTime / 3600
-                it.minutes = newTime / 60
+                it.minutes = (newTime / 60) % 60
                 it.seconds = newTime % 60
             }
         }
