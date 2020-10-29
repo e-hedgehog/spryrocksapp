@@ -58,4 +58,8 @@ class TasksTrackerViewModel: ViewModel() {
         timerManager.pauseTimer(currentTask.value)
     }
 
+    fun stopTimer() {
+        timerManager.stopTimer(currentTask.value)
+    }
+
 }
