@@ -36,7 +36,7 @@ open class Task(
     @PrimaryKey var id: Int = 0,
     var projectName: String = "",
     var taskDescription: String = "",
-    var time: Time? = null,
+    var time: Time? = Time(),
     var lastPause: Long = 0,
     var isStarted: Boolean = false
 ): RealmObject(), Parcelable
