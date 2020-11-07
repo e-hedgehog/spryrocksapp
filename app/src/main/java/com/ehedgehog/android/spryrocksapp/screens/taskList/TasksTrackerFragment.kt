@@ -27,7 +27,7 @@ class TasksTrackerFragment: Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        binding.trackerRecyclerView.adapter = TasksAdapter(TasksAdapter.OnClickListener {
+        binding.trackerRecyclerView.adapter = TasksAdapter(viewModel.timerManager, TasksAdapter.OnClickListener {
             viewModel.displayTaskDetails(it.id)
         })
 

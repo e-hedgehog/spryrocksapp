@@ -9,6 +9,7 @@
     <string name="employee_info_button">Add employee information</string>
     <string name="send_button">Send to HR</string>
     <string name="telegram_hint">Enter your telegram account</string>
+
     <string name="rules_reporting">Rules of reporting</string>
     <string name="rule_1">1. Отчёт заполняется ЕЖЕДНЕВНО и на протяжении всего рабочего дня в режиме РЕАЛЬНОГО ВРЕМЕНИ.
         Вариант забросить отчёт и заполнить его в конце дня или в пятницу за всю рабочую неделю - это не эффективный вариант!
@@ -33,6 +34,7 @@
         Если перед тобой стоит большая задача, требующая большого количества времени - разбей её на подзадачи.</string>
     <string name="rule_6">6. Не стоит разукрашивать официальный документ в серо-буро-малиновые цвета.</string>
     <string name="rule_7">7. В конце КАЖДОГО рабочего дня отчёт нужно копировать и отправлять руководителю в Телеграме.</string>
+
     <string name="date_button_label">Set birth date</string>
     <string name="date_format">dd MMMM yyyy</string>
     <string name="tasks_tracker_button">Tasks tracker</string>
@@ -41,4 +43,6 @@
     <string name="create_label">Create</string>
     <string name="timer_text">%1$s:%2$s:%3$s</string>
     <string name="default_timer_text">0:00:00</string>
+    <string name="task_list_title">Scheduled tasks:</string>
+    <string name="new_task_time_text">not started</string>
 </resources>

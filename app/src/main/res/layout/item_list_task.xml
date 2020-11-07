@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="task"
-            type="com.ehedgehog.android.spryrocksapp.network.Task" />
+            name="model"
+            type="com.ehedgehog.android.spryrocksapp.screens.taskList.TaskListItemModel" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -31,8 +31,8 @@
                 android:textSize="16sp"
                 android:maxLines="1"
                 android:ellipsize="end"
-                android:text="@{task.projectName}"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@{model.task.projectName}"
+                app:layout_constraintEnd_toStartOf="@id/taskTimeField"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Project1" />
@@ -45,12 +45,25 @@
                 android:layout_marginBottom="8dp"
                 android:maxLines="2"
                 android:ellipsize="end"
-                android:text="@{task.taskDescription}"
+                android:text="@{model.task.taskDescription}"
                 app:layout_constraintEnd_toEndOf="@id/projectNameField"
                 app:layout_constraintStart_toStartOf="@id/projectNameField"
                 app:layout_constraintTop_toBottomOf="@id/projectNameField"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:text="Do something" />
+
+            <TextView
+                android:id="@+id/taskTimeField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:text="@{model.task.time.totalSeconds != 0 ? model.task.time.toString() : @string/new_task_time_text}"
+                tools:text="01:23:45"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
