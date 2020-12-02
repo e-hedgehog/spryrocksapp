@@ -45,4 +45,6 @@
     <string name="default_timer_text">0:00:00</string>
     <string name="task_list_title">Scheduled tasks:</string>
     <string name="new_task_time_text">not started</string>
+    <string name="project_name_label">Project:</string>
+    <string name="description_label">Description:</string>
 </resources>

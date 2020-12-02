@@ -6,4 +6,5 @@
 
     <color name="colorCard">#7CFFE3</color>
     <color name="colorUnderline">#8A8A8A</color>
+    <color name="colorBorder">#C4C4C4</color>
 </resources>

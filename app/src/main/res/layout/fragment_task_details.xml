@@ -14,15 +14,28 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:padding="8dp"
+        android:padding="4dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/project_name_field"
+        <TextView
+            android:id="@+id/project_name_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp"
             android:layout_margin="8dp"
+            android:text="@string/project_name_label"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/project_name_field"
+            android:background="@drawable/edit_text_shape"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:hint="@string/project_name_hint"
             android:text="@={viewModel.projectName}"
             android:inputType="text"
@@ -88,11 +101,24 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/description_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp"
+            android:layout_margin="8dp"
+            android:text="@string/description_label"
+            android:textSize="16sp" />
+
         <EditText
             android:id="@+id/description_field"
+            android:background="@drawable/edit_text_shape"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:gravity="top"
             android:hint="@string/task_description_field"
             android:text="@={viewModel.taskDescription}"
