@@ -1,4 +1,6 @@
 <resources>
+
+    <!-- EmployeeInfo block -->
     <string name="app_name">Spry Rocks App</string>
     <string name="name_hint">Enter your name</string>
     <string name="gmail_hint">Enter your gmail account</string>
@@ -6,37 +8,13 @@
     <string name="position_hint">Enter your position</string>
     <string name="gitlab_hint">Enter your gitlab account</string>
     <string name="phone_hint">Enter your phone number</string>
+    <string name="telegram_hint">Enter your telegram account</string>
     <string name="employee_info_button">Add employee information</string>
     <string name="send_button">Send to HR</string>
-    <string name="telegram_hint">Enter your telegram account</string>
-
-    <string name="rules_reporting">Rules of reporting</string>
-    <string name="rule_1">1. Отчёт заполняется ЕЖЕДНЕВНО и на протяжении всего рабочего дня в режиме РЕАЛЬНОГО ВРЕМЕНИ.
-        Вариант забросить отчёт и заполнить его в конце дня или в пятницу за всю рабочую неделю - это не эффективный вариант!
-        В каждый момент времени по отчёту должно быть понятно чем ты занимаешься.
-        Заполнение отчёта в реальном времени является показателем эффективности твоей работы и позволяет вовремя её оценить.</string>
-    <string name="rule_working_schema">Рабочая схема: пришёл в офис - открыл отчёт, создал новую строчку, вписал Число, Месяц, Год
-        и заполнил колонку "Начал". После этого нужно вписать задачу, которую будешь делать (обязательно ПЕРЕД началом работы над этой задачей),
-        название проекта и номер задачи (если он есть). После окончания работы над задачей нужно дополнить колонку "Что/как делал", записать результат
-        и время окончания работы над задачей (колонка "Закончил"). Формула автоматически подсчитает время, затраченное на задачу и выведет его в колонке "Время".
-        В колонке "Результат" нужно вписать реальные результаты, которые были достигнуты в процессе работы над задачей. После этого стоит вставить ссылки на
-        коммиты и Merge Request-ы. После этого можно и нужно создать новую задачу и работать с ней по той же схеме, что и с предыдущей.</string>
-    <string name="rule_2">2. Заглавная (первая) строка отчета должна быть всё время закреплена для удобства работы со всем объемом отчета,
-        а колонка "Проект" не должна объединяться по ячейкам.</string>
-    <string name="rule_3">3. В конце дня нужно проверить свой отчёт. Особое внимание стоит обратить на подсчёт Общего рабочего времени за день.
-        В конце недели в отчёт нужно добавить строку Общее рабочее время за неделю и по формуле подсчитать сумму рабочих часов за каждый день.
-        В конце месяца в отчёт нужно добавить строчку Общее рабочее время за месяц и проконтролировать правильный подсчёт времени за месяц,
-        просуммировав время по каждой из недель.</string>
-    <string name="rule_4">4. Каждый месяц отчет начинается с нового листа. Документ отстается тот же, но лист нужно создать новый и оформить
-        по примеру прошлого месяца, сохранив все колонки. Название листа - "Месяц, Год".  Нумерация месяцев идет слева направо,
-        новый месяц должен находится левее, чем старый.</string>
-    <string name="rule_5">5. Распределяй время так, чтобы одна запись в отчёте была не длиннее чем 2–3 часа.
-        Если перед тобой стоит большая задача, требующая большого количества времени - разбей её на подзадачи.</string>
-    <string name="rule_6">6. Не стоит разукрашивать официальный документ в серо-буро-малиновые цвета.</string>
-    <string name="rule_7">7. В конце КАЖДОГО рабочего дня отчёт нужно копировать и отправлять руководителю в Телеграме.</string>
-
     <string name="date_button_label">Set birth date</string>
     <string name="date_format">dd MMMM yyyy</string>
+
+    <!-- TaskTracker block -->
     <string name="tasks_tracker_button">Tasks tracker</string>
     <string name="project_name_hint">Enter project name</string>
     <string name="task_description_field">Enter task description</string>
@@ -47,4 +25,5 @@
     <string name="new_task_time_text">not started</string>
     <string name="project_name_label">Project:</string>
     <string name="description_label">Description:</string>
+
 </resources>

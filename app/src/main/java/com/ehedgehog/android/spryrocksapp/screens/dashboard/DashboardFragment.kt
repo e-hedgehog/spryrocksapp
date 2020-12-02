@@ -31,10 +31,6 @@ class DashboardFragment: Fragment() {
                 findNavController().navigate(DashboardFragmentDirections.actionDashboardToEmployeeInfo())
         }
 
-        binding.reportingRules.setOnClickListener {
-            findNavController().navigate(DashboardFragmentDirections.actionDashboardToReportingRules())
-        }
-
         binding.timeTracker.setOnClickListener {
             findNavController().navigate(DashboardFragmentDirections.actionDashboardToTasksTracker())
         }
