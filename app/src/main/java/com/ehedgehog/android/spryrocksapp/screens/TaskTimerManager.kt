@@ -15,15 +15,8 @@ class TaskTimerManager(private val timerUseCase: TimerUseCase, private val datab
     val isTimerStarted: LiveData<Boolean> get() = _isTimerStarted
 
     fun initTimer(task: Task) {
-        if (task.isStarted) {
-            task.time?.let {
-                val interval = (Date().time - task.lastPause) / 1000
-                val newTime = interval + it.totalSeconds
-                it.hours = newTime / 3600
-                it.minutes = (newTime / 60) % 60
-                it.seconds = newTime % 60
-            }
-        }
+        if (task.isStarted)
+            updateTimeValues(task)
 
         _time.value = task.time
         _isTimerStarted.value = task.isStarted
@@ -42,6 +35,11 @@ class TaskTimerManager(private val timerUseCase: TimerUseCase, private val datab
     }
 
     fun startTimer(task: Task?) {
+        val startedTask: Task? = databaseManager.getStartedTask()
+        if (startedTask != null && startedTask.id != task?.id) {
+            stopAnotherActiveTask(startedTask)
+        }
+
         _isTimerStarted.value = true
         task?.let {
             it.isStarted = true
@@ -98,6 +96,32 @@ class TaskTimerManager(private val timerUseCase: TimerUseCase, private val datab
 
     private fun stopTimerObservable() {
         timerUseCase.stopTimer()
+    }
+
+    private fun updateTimeValues(task: Task): Long {
+        task.time?.let {
+            val interval = (Date().time - task.lastPause) / 1000
+            val newTime = interval + it.totalSeconds
+            it.hours = newTime / 3600
+            it.minutes = (newTime / 60) % 60
+            it.seconds = newTime % 60
+            return newTime
+        }
+
+        return 0
+    }
+
+    private fun stopAnotherActiveTask(activeTask: Task?) {
+        activeTask?.let {
+            it.isStarted = false
+            val newTime = updateTimeValues(it)
+            it.time?.totalSeconds = newTime
+            it.lastPause = 0
+            databaseManager.updateTask(it)
+        }
+
+        _isTimerStarted.value = false
+        stopTimerObservable()
     }
 
 }
