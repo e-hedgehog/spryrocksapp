@@ -1,7 +1,10 @@
 package com.ehedgehog.android.spryrocksapp.screens.taskList
 
+import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
@@ -13,7 +16,11 @@ import com.ehedgehog.android.spryrocksapp.databinding.ItemListTaskBinding
 import com.ehedgehog.android.spryrocksapp.network.Task
 import com.ehedgehog.android.spryrocksapp.screens.TaskTimerManager
 
-class TasksAdapter(private val timerManager: TaskTimerManager, private val onClickListener: OnClickListener) : ListAdapter<Task, TasksAdapter.TaskViewHolder>(DiffCallback) {
+class TasksAdapter(
+    private val timerManager: TaskTimerManager,
+    private val clickListener: (task: Task) -> Unit,
+    private val contextMenuItemClickListener: (item: MenuItem, task: Task) -> Boolean
+) : ListAdapter<Task, TasksAdapter.TaskViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         return TaskViewHolder(
@@ -28,7 +35,14 @@ class TasksAdapter(private val timerManager: TaskTimerManager, private val onCli
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val task = getItem(position)
-        holder.itemView.setOnClickListener { onClickListener.onClick(task) }
+        holder.itemView.setOnClickListener { clickListener(task) }
+        holder.itemView.setOnLongClickListener {
+            val popupMenu = PopupMenu(holder.itemView.context, holder.itemView, Gravity.END)
+            popupMenu.inflate(R.menu.context_menu_tasks_tracker)
+            popupMenu.setOnMenuItemClickListener { contextMenuItemClickListener(it, task) }
+            popupMenu.show()
+            true
+        }
         holder.bind(TaskListItemModel(timerManager.time, task))
     }
 
@@ -52,10 +66,6 @@ class TasksAdapter(private val timerManager: TaskTimerManager, private val onCli
                 })
             }
         }
-    }
-
-    class OnClickListener(val clickListener: (task: Task) -> Unit) {
-        fun onClick(task: Task) = clickListener(task)
     }
 
 }

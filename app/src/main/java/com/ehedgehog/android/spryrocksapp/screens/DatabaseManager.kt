@@ -47,4 +47,11 @@ class DatabaseManager(val realm: Realm) {
         return if (storedTask != null) realm.copyFromRealm(storedTask) else null
     }
 
+    fun deleteTask(task: Task) {
+        realm.executeTransaction { realm ->
+            val results = realm.where(Task::class.java).equalTo("id", task.id).findAll()
+            results.deleteAllFromRealm()
+        }
+    }
+
 }

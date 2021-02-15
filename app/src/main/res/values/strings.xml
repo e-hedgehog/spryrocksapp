@@ -25,5 +25,6 @@
     <string name="new_task_time_text">not started</string>
     <string name="project_name_label">Project:</string>
     <string name="description_label">Description:</string>
+    <string name="delete_label">Delete</string>
 
 </resources>

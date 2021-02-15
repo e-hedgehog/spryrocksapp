@@ -1,9 +1,11 @@
 package com.ehedgehog.android.spryrocksapp.screens.taskList
 
+import android.view.MenuItem
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ehedgehog.android.spryrocksapp.Application
+import com.ehedgehog.android.spryrocksapp.R
 import com.ehedgehog.android.spryrocksapp.network.Task
 import com.ehedgehog.android.spryrocksapp.screens.DatabaseManager
 import com.ehedgehog.android.spryrocksapp.screens.TaskTimerManager
@@ -60,6 +62,26 @@ class TasksTrackerViewModel: ViewModel() {
 
     fun stopTimer() {
         timerManager.stopTimer(currentTask.value)
+    }
+
+    fun onContextMenuItemClicked(item: MenuItem, task: Task): Boolean {
+        return when (item.itemId) {
+            R.id.context_delete_item -> {
+                deleteTask(task)
+                true
+            }
+            else -> false
+        }
+    }
+
+    private fun deleteTask(task: Task) {
+        currentTask.value?.let {
+            if (task.id == it.id)
+                stopTimer()
+        }
+
+        _listTasks.value = listTasks.value?.minus(task)
+        databaseManager.deleteTask(task)
     }
 
 }
